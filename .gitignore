@@ -5,7 +5,7 @@ __pycache__/
 
 # C extensions
 *.so
-. info.py
+/Login_System/info
 
 # Distribution / packaging
 .Python
