@@ -1,3 +1,4 @@
+{% load static tailwind_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,46 +6,63 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
+    {% tailwind_css %}
 </head>
-<body>
+<body class="bg-gray-900 text-white font-sans">
 
+    <!-- Display messages -->
     {% for message in messages %}
-    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show mx-4 my-2 p-4 rounded-lg shadow-lg bg-{{ message.tags }}-800 text-white" role="alert">
         <strong>Message:</strong> {{ message }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
+        <button type="button" class="close text-lg font-bold" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
     {% endfor %}
 
-    <h3>Create your account!</h3>
-    <form method="post" action="/signup">
-        {% csrf_token %}
-        <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" class="form-control" id="username" name="username" placeholder="Create A Username (use only letters and numbers)" Required>
-        </div>
-        <div class="form-group">
-            <label for="fname">First Name</label>
-            <input type="text" class="form-control" id="fname" name="fname" placeholder="Enter Your First Name" Required>
-        </div>
-        <div class="form-group">
-            <label for="lname">Last Name</label>
-            <input type="text" class="form-control" id="lname" name="lname" placeholder="Enter Your Last Name" Required>
-        </div>
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="Enter Your Email Address" Required>
-        </div>
-        <div class="form-group">
-            <label for="pass1">Password</label>
-            <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Create Your Password" Required>
-        </div>
-        <div class="form-group">
-            <label for="pass2">Confirm Password</label>
-            <input type="password" class="form-control" id="pass2" name="pass2" placeholder="Confirm Your Password" Required>
-        </div>
-        <button type="submit" class="btn btn-primary">Sign Up</button>
-    </form>
+    <div class="max-w-lg mx-auto p-6 bg-gray-800 rounded-lg shadow-md">
+        <h3 class="text-3xl font-semibold text-center text-white mb-6">Create Your Account</h3>
+        
+        <form method="post" action="/signup" class="space-y-4">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="username" class="text-white">Username</label>
+                <input type="text" class="form-control w-full p-3 rounded-lg bg-gray-700 text-white border-2 border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" id="username" name="username" placeholder="Create A Username (use only letters and numbers)" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="fname" class="text-white">First Name</label>
+                <input type="text" class="form-control w-full p-3 rounded-lg bg-gray-700 text-white border-2 border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" id="fname" name="fname" placeholder="Enter Your First Name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="lname" class="text-white">Last Name</label>
+                <input type="text" class="form-control w-full p-3 rounded-lg bg-gray-700 text-white border-2 border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" id="lname" name="lname" placeholder="Enter Your Last Name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email" class="text-white">Email</label>
+                <input type="email" class="form-control w-full p-3 rounded-lg bg-gray-700 text-white border-2 border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" id="email" name="email" placeholder="Enter Your Email Address" required>
+            </div>
+
+            <div class="form-group">
+                <label for="pass1" class="text-white">Password</label>
+                <input type="password" class="form-control w-full p-3 rounded-lg bg-gray-700 text-white border-2 border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" id="pass1" name="pass1" placeholder="Create Your Password" required>
+            </div>
+
+            <div class="form-group">
+                <label for="pass2" class="text-white">Confirm Password</label>
+                <input type="password" class="form-control w-full p-3 rounded-lg bg-gray-700 text-white border-2 border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" id="pass2" name="pass2" placeholder="Confirm Your Password" required>
+            </div>
+
+            <div class="flex justify-center mt-4">
+                <button type="submit" class="bg-blue-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-600 transition duration-200">
+                    Sign Up
+                </button>
+            </div>
+        </form>
+    </div>
+
 </body>
 </html>

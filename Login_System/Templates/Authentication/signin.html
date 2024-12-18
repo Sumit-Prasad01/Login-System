@@ -1,3 +1,4 @@
+{% load static tailwind_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,31 +6,42 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign In</title>
+    {% tailwind_css %}
 </head>
-<body>
+<body class="bg-gray-900 text-white font-sans">
 
+    <!-- Display messages -->
     {% for message in messages %}
-    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show mx-4 my-2 p-4 rounded-lg shadow-lg bg-{{ message.tags }}-800 text-white" role="alert">
         <strong>Message:</strong> {{ message }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
+        <button type="button" class="close text-lg font-bold" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
     {% endfor %}
 
-    <h3>Log In to your account!</h3>
-    <form method="post" action="/signin" class="mb-2">
-        {% csrf_token %}
-        <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" class="form-control" id="username" name="username" placeholder="Enter Your Username" Required>
-        </div>
-        <div class="form-group">
-            <label for="pass1">Password</label>
-            <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Enter Your Password" Required>
-        </div>
+    <div class="max-w-md mx-auto p-6 bg-gray-800 rounded-lg shadow-md">
+        <h3 class="text-3xl font-semibold text-center text-white mb-6">Log In to Your Account</h3>
+        
+        <form method="post" action="/signin" class="space-y-4">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username" class="text-white">Username</label>
+                <input type="text" class="form-control w-full p-3 rounded-lg bg-gray-700 text-white border-2 border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" id="username" name="username" placeholder="Enter Your Username" required>
+            </div>
 
-        <button type="submit" class="btn btn-primary">Log In</button>
-    </form>
+            <div class="form-group">
+                <label for="pass1" class="text-white">Password</label>
+                <input type="password" class="form-control w-full p-3 rounded-lg bg-gray-700 text-white border-2 border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" id="pass1" name="pass1" placeholder="Enter Your Password" required>
+            </div>
+
+            <div class="flex justify-center mt-4">
+                <button type="submit" class="bg-blue-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-600 transition duration-200">
+                    Log In
+                </button>
+            </div>
+        </form>
+    </div>
+
 </body>
 </html>

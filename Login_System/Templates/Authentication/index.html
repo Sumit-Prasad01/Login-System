@@ -1,3 +1,4 @@
+{% load static tailwind_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,29 +6,45 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
+    {% tailwind_css %}
 </head>
-<body>
+<body class="bg-gray-900 text-white font-sans">
 
+    <!-- Display messages -->
     {% for message in messages %}
-    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show mx-4 my-2 p-4 rounded-lg shadow-lg bg-{{ message.tags }}-800 text-white" role="alert">
         <strong>Message:</strong> {{ message }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
+        <button type="button" class="close text-lg font-bold" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
     {% endfor %}
 
-    <h3>Welcome-User</h3>
+    <div class="container mx-auto p-6">
+        <!-- Welcome Text -->
+        <h3 class="text-4xl font-semibold text-center text-white mb-8">Welcome to Our Website!</h3>
 
-    {% if user.is_authenticated %}
-    <h3>Hello {{fname}}!</h3>
-    <h4>You're successfully logged in.</h4>
-    <button type="submit"><a href="/signout">SignOut</a></button>
-    {% else %}
-    <button type="submit"><a href="/signup">SignUp</a></button>
-    <br/>
-    <br/>
-    <button type="submit"><a href="/signin">SignIn</a></button>
-    {% endif %}
+        {% if user.is_authenticated %}
+        <!-- Logged-in user content -->
+        <h3 class="text-2xl font-semibold text-center text-white">Hello, {{ fname }}!</h3>
+        <h4 class="text-xl text-center text-gray-400 mb-4">You're successfully logged in.</h4>
+        <div class="flex justify-center space-x-4">
+            <button class="bg-blue-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-600 transition">
+                <a href="/signout">SignOut</a>
+            </button>
+        </div>
+        {% else %}
+        <!-- Not logged-in content -->
+        <div class="flex justify-center space-x-4">
+            <button class="bg-green-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-green-600 transition">
+                <a href="/signup">SignUp</a>
+            </button>
+            <button class="bg-blue-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-600 transition">
+                <a href="/signin">SignIn</a>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+
 </body>
 </html>
